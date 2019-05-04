@@ -1,5 +1,6 @@
-package collegiate_dictionary
+package dictionary
 
+// Variant is documented at https://dictionaryapi.com/products/json#sec-2.vrs
 type Variant struct {
 	Variant        string           `json:"va"`
 	VariantLabel   string           `json:"vl,omitempty"`

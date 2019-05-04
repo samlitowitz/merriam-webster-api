@@ -1,5 +1,6 @@
-package collegiate_dictionary
+package dictionary
 
+// The Inflection is documented at https://dictionaryapi.com/products/json#sec-2.ins
 type Inflection struct {
 	Full           string           `json:"if,omitempty"`  // A fully spelled-out inflection
 	Ending         string           `json:"ifc,omitempty"` // An inflection ending (eg, "-ing")

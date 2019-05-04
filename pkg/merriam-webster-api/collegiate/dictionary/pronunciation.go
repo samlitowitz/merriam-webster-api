@@ -1,5 +1,6 @@
-package collegiate_dictionary
+package dictionary
 
+// The Pronunciation is documented at https://dictionaryapi.com/products/json#sec-2.prs
 type Pronunciation struct {
 	Written     string `json:"mw,omitempty"`  // Written pronunciation in Merriam-Webster format
 	BeforeLabel string `json:"l,omitempty"`   // Pronunciation label before pronunciation
