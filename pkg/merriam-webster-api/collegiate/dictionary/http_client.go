@@ -12,12 +12,9 @@ import (
 // A HTTPClient is an HTTP based client lookup word definitions
 // using Merriam-Websters Collegiate Dictionary API.
 type HTTPClient struct {
-	baseURL           *url.URL
+	BaseURL           *url.URL
 	apiKey, userAgent string
 	httpClient        *http.Client
-
-	// requests made
-	// successful requests made
 }
 
 // NewClient returns a new HTTPClient given an API key, a user agent, and
@@ -26,22 +23,17 @@ func NewClient(apiKey string, userAgent string, client *http.Client) (*HTTPClien
 	baseUrl, _ := url.Parse("https://dictionaryapi.com/api/v3/references/collegiate/json")
 
 	return &HTTPClient{
-		baseURL:    baseUrl,
+		BaseURL:    baseUrl,
 		apiKey:     apiKey,
 		userAgent:  userAgent,
 		httpClient: client,
 	}, nil
 }
 
-// SetBaseURL sets the base URL used by the client
-func (c *HTTPClient) SetBaseURL(baseURL *url.URL) {
-	c.baseURL = baseURL
-}
-
 // Lookup returns the dictionary response if successful. On failure the
 // reason is returned.
 func (c *HTTPClient) Lookup(ctx context.Context, word string) ([]*Response, error) {
-	req, err := c.newRequest("GET", c.baseURL.Path+"/"+word, nil)
+	req, err := c.newRequest("GET", c.BaseURL.Path+"/"+word, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -53,7 +45,7 @@ func (c *HTTPClient) Lookup(ctx context.Context, word string) ([]*Response, erro
 
 func (c *HTTPClient) newRequest(method, path string, body interface{}) (*http.Request, error) {
 	rel := &url.URL{Path: path}
-	u := c.baseURL.ResolveReference(rel)
+	u := c.BaseURL.ResolveReference(rel)
 
 	q := u.Query()
 	q.Set("key", c.apiKey)
